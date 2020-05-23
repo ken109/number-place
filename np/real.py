@@ -30,7 +30,8 @@ class RealTime(Solver):
             for i in range(9):
                 for j in range(9):
                     if self.solving[j][i] != 0:
-                        text = font.render(str(self.solving[j][i]), True, (0, 0, 0))
+                        text = font.render(str(self.solving[j][i]), True,
+                                           (0, 0, 0) if self.question[j][i] == 0 else (255, 0, 0))
                         screen.blit(text, ((i + 0.3) * b_size, (j + 0.2) * b_size))
 
             pygame.display.update()
