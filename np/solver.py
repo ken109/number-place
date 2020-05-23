@@ -10,26 +10,27 @@ class Solver:
         self.board = board.board
         self.history = board.history
 
-    def solve(self, x=0, y=0):
+    def solve(self, x=0, y=0, history=True):
         if y > 8:
             return True
         elif self.question[y][x] != 0:
             if x == 8:
-                if self.solve(0, y + 1):
+                if self.solve(0, y + 1, history):
                     return True
             else:
-                if self.solve(x + 1, y):
+                if self.solve(x + 1, y, history):
                     return True
         else:
             for i in self.board[y][x]:
                 if self.check(x, y, i):
                     self.question[y][x] = i
-                    self.history.append(deepcopy(self.question))
+                    if history:
+                        self.history.append(deepcopy(self.question))
                     if x == 8:
-                        if self.solve(0, y + 1):
+                        if self.solve(0, y + 1, history):
                             return True
                     else:
-                        if self.solve(x + 1, y):
+                        if self.solve(x + 1, y, history):
                             return True
             self.question[y][x] = 0
             return False

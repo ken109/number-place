@@ -1,8 +1,8 @@
-from np.draw import NPDraw
+from np.real import RealTime
 
 
 def main():
-    NPDraw('question2.txt', delay=0.2, size=500)
+    RealTime('question5.txt', size=500)
 
 
 if __name__ == '__main__':
