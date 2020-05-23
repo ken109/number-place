@@ -21,7 +21,6 @@ class Drawer(Solver):
         executor = futures.ThreadPoolExecutor(max_workers=1)
         executor.submit(self.solve, history=False if delay <= 0 else True)
 
-        history = 0
         refresh = time()
         while True:
             screen.fill((255, 255, 255))
@@ -32,14 +31,13 @@ class Drawer(Solver):
 
             for i in range(9):
                 for j in range(9):
-                    if self.solving[j][i] if delay <= 0 else self.history[history][j][i] != 0:
-                        text = font.render(str(self.solving[j][i] if delay <= 0 else self.history[history][j][i]), True,
+                    if self.solving[j][i] if delay <= 0 else self.history[0][j][i] != 0:
+                        text = font.render(str(self.solving[j][i] if delay <= 0 else self.history[0][j][i]), True,
                                            (0, 0, 0) if self.question[j][i] == 0 else (255, 0, 0))
                         screen.blit(text, ((i + 0.3) * b_size, (j + 0.2) * b_size))
 
-            if 0 < delay < time() - refresh and len(self.history) - 1 > history:
-                self.history.pop(history)
-                history += 1
+            if 0 < delay < time() - refresh and len(self.history) > 1:
+                self.history.pop(0)
                 refresh = time()
             pygame.display.update()
             for event in pygame.event.get():
