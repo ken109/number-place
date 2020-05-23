@@ -36,23 +36,13 @@ class Board:
             self.make_board()
 
     def row(self, y):
-        no = set()
-        for i in range(9):
-            if self.question[y][i] != 0:
-                no.add(self.question[y][i])
-        return no
+        return {self.question[y][_x] for _x in range(9) if self.question[y][_x] != 0}
 
     def column(self, x):
-        no = set()
-        for i in range(9):
-            if self.question[i][x] != 0:
-                no.add(self.question[i][x])
-        return no
+        return {self.question[_y][x] for _y in range(9) if self.question[_y][x] != 0}
 
     def block(self, x, y):
-        no = set()
-        for i in range((y // 3) * 3, (y // 3) * 3 + 3):
-            for j in range((x // 3) * 3, (x // 3) * 3 + 3):
-                if self.question[i][j] != 0:
-                    no.add(self.question[i][j])
-        return no
+        return {self.question[_y][_x]
+                for _y in range((y // 3) * 3, (y // 3) * 3 + 3)
+                for _x in range((x // 3) * 3, (x // 3) * 3 + 3)
+                if self.question[_y][_x] != 0}
