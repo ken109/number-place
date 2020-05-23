@@ -19,7 +19,7 @@ class Board:
             for j in range(9):
                 if self.question[i][j] == 0:
                     self.board[i].append(
-                        {i for i in range(1, 10)} - self.check_h(i) - self.check_v(j) - self.check_block(j, i))
+                        {i for i in range(1, 10)} - self.row(i) - self.column(j) - self.block(j, i))
                 else:
                     self.board[i].append({self.question[i][j]})
         self.before_question = self.question
@@ -35,21 +35,21 @@ class Board:
             self.history.append(self.before_question)
             self.make_board()
 
-    def check_v(self, x):
-        no = set()
-        for i in range(9):
-            if self.question[i][x] != 0:
-                no.add(self.question[i][x])
-        return no
-
-    def check_h(self, y):
+    def row(self, y):
         no = set()
         for i in range(9):
             if self.question[y][i] != 0:
                 no.add(self.question[y][i])
         return no
 
-    def check_block(self, x, y):
+    def column(self, x):
+        no = set()
+        for i in range(9):
+            if self.question[i][x] != 0:
+                no.add(self.question[i][x])
+        return no
+
+    def block(self, x, y):
         no = set()
         for i in range((y // 3) * 3, (y // 3) * 3 + 3):
             for j in range((x // 3) * 3, (x // 3) * 3 + 3):
