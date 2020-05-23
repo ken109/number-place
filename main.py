@@ -1,8 +1,8 @@
-from np.real import RealTime
+from np.drawer import Drawer
 
 
 def main():
-    RealTime('question5.txt', size=500)
+    Drawer('question5.txt', size=500)
 
 
 if __name__ == '__main__':

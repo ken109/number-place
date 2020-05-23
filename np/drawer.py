@@ -2,12 +2,13 @@ import pygame
 from pygame.locals import *
 import sys
 from concurrent import futures
+from time import time
 
 from .solver import Solver
 
 
-class RealTime(Solver):
-    def __init__(self, txt, size=300):
+class Drawer(Solver):
+    def __init__(self, txt, delay=0, size=300):
         super().__init__(txt)
         pygame.init()
         screen = pygame.display.set_mode((size, size))
@@ -18,8 +19,10 @@ class RealTime(Solver):
         font = pygame.font.SysFont(None, int(b_size))
 
         executor = futures.ThreadPoolExecutor(max_workers=1)
-        executor.submit(self.solve, history=False)
+        executor.submit(self.solve, history=False if delay <= 0 else True)
 
+        history = 0
+        refresh = time()
         while True:
             screen.fill((255, 255, 255))
 
@@ -29,11 +32,15 @@ class RealTime(Solver):
 
             for i in range(9):
                 for j in range(9):
-                    if self.solving[j][i] != 0:
-                        text = font.render(str(self.solving[j][i]), True,
+                    if self.solving[j][i] if delay <= 0 else self.history[history][j][i] != 0:
+                        text = font.render(str(self.solving[j][i] if delay <= 0 else self.history[history][j][i]), True,
                                            (0, 0, 0) if self.question[j][i] == 0 else (255, 0, 0))
                         screen.blit(text, ((i + 0.3) * b_size, (j + 0.2) * b_size))
 
+            if len(self.history) - 1 > history and time() - refresh > delay:
+                self.history.pop(history)
+                history += 1
+                refresh = time()
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == QUIT:
