@@ -6,7 +6,7 @@ import sys
 from .solver import Solver
 
 
-class NPDraw:
+class Draw:
     def __init__(self, txt, delay=0.5, size=300):
         self.solver = Solver(txt)
         self.solver.solve()
