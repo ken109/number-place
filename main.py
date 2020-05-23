@@ -1,4 +1,4 @@
-from np.drawer import Drawer
+from np import Drawer
 
 
 def main():
