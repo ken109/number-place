@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from .base import Board
+from .board import Board
 
 
 class Solver:
