@@ -8,7 +8,7 @@ from .solver import Solver
 
 
 class Drawer(Solver):
-    def __init__(self, txt, delay=0, size=300):
+    def __init__(self, txt, delay=0, size=500):
         super().__init__(txt)
         pygame.init()
         screen = pygame.display.set_mode((size, size))
