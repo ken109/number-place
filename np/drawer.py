@@ -37,7 +37,7 @@ class Drawer(Solver):
                                            (0, 0, 0) if self.question[j][i] == 0 else (255, 0, 0))
                         screen.blit(text, ((i + 0.3) * b_size, (j + 0.2) * b_size))
 
-            if len(self.history) - 1 > history and time() - refresh > delay:
+            if 0 < delay < time() - refresh and len(self.history) - 1 > history:
                 self.history.pop(history)
                 history += 1
                 refresh = time()
