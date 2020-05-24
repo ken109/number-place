@@ -48,8 +48,6 @@ class Solver:
         return all(True if i != self.solving[_y][x] else False for _y in range(9))
 
     def block(self, x, y, i):
-        x_base = (x // 3) * 3
-        y_base = (y // 3) * 3
         return all(True if i != self.solving[_y][_x] else False
-                   for _y in range(y_base, y_base + 3)
-                   for _x in range(x_base, x_base + 3))
+                   for _y in range((y // 3) * 3, (y // 3) * 3 + 3)
+                   for _x in range((x // 3) * 3, (x // 3) * 3 + 3))
