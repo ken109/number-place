@@ -37,9 +37,7 @@ class Solver:
             return False
 
     def check(self, x, y, i):
-        if self.row(y, i) and self.column(x, i) and self.block(x, y, i):
-            return True
-        return False
+        return self.row(y, i) and self.column(x, i) and self.block(x, y, i)
 
     def row(self, y, i):
         return all(True if i != self.solving[y][_x] else False for _x in range(9))
