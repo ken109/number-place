@@ -40,12 +40,12 @@ class Solver:
         return self.row(y, i) and self.column(x, i) and self.block(x, y, i)
 
     def row(self, y, i):
-        return all(True if i != self.solving[y][_x] else False for _x in range(9))
+        return all(i != self.solving[y][_x] for _x in range(9))
 
     def column(self, x, i):
-        return all(True if i != self.solving[_y][x] else False for _y in range(9))
+        return all(i != self.solving[_y][x] for _y in range(9))
 
     def block(self, x, y, i):
-        return all(True if i != self.solving[_y][_x] else False
+        return all(i != self.solving[_y][_x]
                    for _y in range((y // 3) * 3, (y // 3) * 3 + 3)
                    for _x in range((x // 3) * 3, (x // 3) * 3 + 3))
