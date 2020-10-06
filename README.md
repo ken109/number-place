@@ -3,3 +3,8 @@ pythonのバージョンは3.7しか確認してません。3.8では動きま�
 ```
 pip install pygame
 ```
+
+# 実行
+```
+python main.py
+```
